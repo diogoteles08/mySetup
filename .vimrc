@@ -18,8 +18,14 @@ set pastetoggle=<F9>    " Useful so auto-indenting doesn't mess up code when pas
 function! RepeatChar(char, count)
   return repeat(a:char, a:count)
 endfunction
-nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
-nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
+
+" Mapeia s para inserir um unico caracter sem entrar em modo insert
+" e S para usar append para um unico caracter tbm no modo normal
+" nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
+" nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
+
+" Make Y yank till end of line
+nnoremap Y y$
 
 set encoding=utf-8
 set scrolloff=3
