@@ -15,9 +15,10 @@ set linebreak   " Causes vim to not wrap text in the middle of a word
 set pastetoggle=<F9>    " Useful so auto-indenting doesn't mess up code when pasting
  
 " With this script you can use s and S to insert or append a single char
-function! RepeatChar(char, count)
-  return repeat(a:char, a:count)
-endfunction
+"
+" function! RepeatChar(char, count)
+  " return repeat(a:char, a:count)
+" endfunction
 
 " Mapeia s para inserir um unico caracter sem entrar em modo insert
 " e S para usar append para um unico caracter tbm no modo normal
@@ -27,6 +28,10 @@ endfunction
 " Make Y yank till end of line
 nnoremap Y y$
 
+" Sets clipboard as default register
+set clipboard=unnamedplus
+
+set mouse=a
 set encoding=utf-8
 set scrolloff=3
 set autoindent
