@@ -15,7 +15,7 @@ fi
 # User specific aliases and functions
 alias op="gnome-open"
 alias lsa="ls -a"
-alias vim="vimx"
+# alias vim="vimx"
 
 # Setting default editor
 export VISUAL=vim
