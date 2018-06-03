@@ -18,5 +18,5 @@ alias lsa="ls -a"
 # alias vim="vimx"
 
 # Setting default editor
-export VISUAL=vim
+export VISUAL=vi
 export EDITOR="$VISUAL"
