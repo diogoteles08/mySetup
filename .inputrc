@@ -1,2 +1,7 @@
 set bell-style none
 set editing-mode vi
+
+# How to fix ç on fedora:
+# Fixed following https://roberto.selbach.ca/cedilha-no-fedora-25/
+# But also had followed the steps descrived on this one:
+# https://christiano.me/resolvendo-problema-do-cedilha-no-fedora-24/
