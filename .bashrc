@@ -12,14 +12,10 @@ fi
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
-# User specific aliases and functions
-alias op="gnome-open"
-alias lsa="ls -a"
-alias vim="vimx"
-
 # Setting default editor
 export VISUAL=vi
 export EDITOR="$VISUAL"
 
 # PATH environment settings
 # export PATH=/opt/mongodb-linux-x86_64-4.0.1/bin:$PATH
+
