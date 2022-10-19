@@ -28,6 +28,11 @@ set pastetoggle=<F9>    " Useful so auto-indenting doesn't mess up code when pas
 " Make Y yank till end of line
 nnoremap Y y$
 
+" Makes going up and down consider long lines occuping more then one row of
+" text
+map j gj
+map k gk
+
 " Sets clipboard as default register
 set clipboard=unnamedplus
 
