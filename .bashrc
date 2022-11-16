@@ -16,6 +16,8 @@ fi
 export VISUAL=vi
 export EDITOR="$VISUAL"
 
+export GITHUB_AUTH_TOKEN=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
+
 # PATH environment settings
-# export PATH=/opt/mongodb-linux-x86_64-4.0.1/bin:$PATH
+export PATH=$PATH:~/go/bin
 
