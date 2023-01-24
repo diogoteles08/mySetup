@@ -37,7 +37,7 @@ jobs:
           persist-credentials: false
 
       - name: "Run analysis"
-        uses: ossf/scorecard-action@ed9576c83f612071d013a82d520e4eab5fe277bd # arbitrary commit
+        uses: ossf/scorecard-action@latest # latest
         with:
           results_file: results.sarif
           results_format: sarif
