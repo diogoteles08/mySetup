@@ -13,5 +13,7 @@ Add the files to your home directory:
 cd /~
 git init
 git remote add origin https://github.com/diogoteles08/mySetup
-git pull
+git pull origin main
 ```
+
+If you already have configs on your .bashrc, you might be asked to merge with the .bashrc from this repo. As a solution, I keep local and/or private configurations on .bash_profile, which is imported on .bashrc. Then you can pass your existent configuration from .bashrc to .bash_profile, pull changes from the repo, and then merge as you like.
