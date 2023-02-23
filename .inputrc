@@ -1,7 +1,6 @@
-set bell-style none
+# Sets command line key bindings to be vim-like o/
 set editing-mode vi
+set keymap vi
 
-# How to fix ç on fedora:
-# Fixed following https://roberto.selbach.ca/cedilha-no-fedora-25/
-# But also had followed the steps descrived on this one:
-# https://christiano.me/resolvendo-problema-do-cedilha-no-fedora-24/
+# Removes the annoying warning sound that palyed everytime you missclick something and type an invalid key on terminal
+set bell-style none
