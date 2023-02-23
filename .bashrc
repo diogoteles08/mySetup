@@ -18,6 +18,6 @@ if [ -f ~/.bash_profile ]; then
     . ~/.bash_profile
 fi
 
-# Setting default editor
-export VISUAL=vi
+# Set default editor as VIM
+export VISUAL=vim
 export EDITOR="$VISUAL"
