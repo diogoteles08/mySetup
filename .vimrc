@@ -35,11 +35,6 @@ au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = arm6/7
 
 """"""""""""""""" Key Bindings
 
-" Makes going up and down consider long lines occuping more then one row of
-" text
-map j gj
-map k gk
-
 " Copy to clipboard
 vnoremap  y  "+y
 nnoremap  Y  "+yg_
