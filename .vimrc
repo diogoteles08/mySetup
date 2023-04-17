@@ -41,6 +41,13 @@ nnoremap  Y  "+yg_
 nnoremap  y  "+y
 nnoremap  yy  "+yy
 
+" Same for delete
+" Source: https://stackoverflow.com/questions/54255/in-vim-is-there-a-way-to-delete-without-putting-text-in-the-register
+vnoremap  d  "+d
+nnoremap d "+d
+nnoremap D "+D
+nnoremap dd "+dd
+
 " Paste from clipboard
 nnoremap p "+p
 nnoremap P "+P
