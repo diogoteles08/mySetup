@@ -12,7 +12,7 @@ Add the files to your home directory:
 ```
 cd /~
 git init
-git remote add origin https://github.com/diogoteles08/mySetup
+git remote add origin git@github.com:diogoteles08/mySetup.git
 git pull origin main
 ```
 
