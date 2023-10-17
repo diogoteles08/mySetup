@@ -2,5 +2,10 @@
 set editing-mode vi
 set keymap vi
 
+# Configures TAB autocompletion
+set completion-ignore-case on
+set show-all-if-ambiguous on
+TAB: menu-complete
+
 # Removes the annoying warning sound that palyed everytime you missclick something and type an invalid key on terminal
 set bell-style none
