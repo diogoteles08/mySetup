@@ -31,3 +31,16 @@ PS1="\[\e[1;32m\]\u:\[\e[1;96m\]\w\[\e[m\]\\$ "
 bind "set show-all-if-ambiguous on"
 bind "set completion-ignore-case on"
 bind "set menu-complete-display-prefix on"
+
+# Installs script for git tab autocompletion
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+else
+  echo "
+  WARNING: .git-completion.bash is missing. To fix it, download the script by running 
+  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+check: https://www.baeldung.com/linux/git-autocompletion
+
+For details, check https://www.baeldung.com/linux/git-autocompletion
+"
+fi
