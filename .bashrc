@@ -31,3 +31,5 @@ PS1="\[\e[1;32m\]\u:\[\e[1;96m\]\w\[\e[m\]\\$ "
 bind "set show-all-if-ambiguous on"
 bind "set completion-ignore-case on"
 bind "set menu-complete-display-prefix on"
+
+source /usr/local/google/home/diogoteles/.saci-bashrc
