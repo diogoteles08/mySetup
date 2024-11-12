@@ -35,6 +35,9 @@ au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = arm6/7
 
 """"""""""""""""" Key Bindings
 
+" Make , be a shortcut to run the last used macro
+:map , @@
+
 " Copy to clipboard
 vnoremap  y  "+y
 nnoremap  Y  "+yg_
