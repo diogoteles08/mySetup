@@ -18,14 +18,11 @@ if [ -f ~/.bash_profile ]; then
     . ~/.bash_profile
 fi
 
-# Set default editor as VIM
-export VISUAL=vim
-export EDITOR="$VISUAL"
-
-
 # Defines the format of Bash prompt
 PS1="\[\e[1;32m\]\u:\[\e[1;96m\]\w\[\e[m\]\\$ "
 
+# Enables highlight when searching -- useful with just *
+set glsearch
 
 # Preferences arount tab autocompletion/suggestion
 bind "set show-all-if-ambiguous on"

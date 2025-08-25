@@ -1,6 +1,5 @@
 # Sets command line key bindings to be vim-like o/
 set editing-mode vi
-set keymap vi
 
 # Configures TAB autocompletion
 set completion-ignore-case on
@@ -9,3 +8,80 @@ TAB: menu-complete
 
 # Removes the annoying warning sound that palyed everytime you missclick something and type an invalid key on terminal
 set bell-style none
+
+# Copy/paste of crazy guy config from:
+# https://www.reddit.com/r/vim/comments/1emhips/using_vim_keybindings_in_bash_cli
+$if mode=vi
+    set show-mode-in-prompt on
+
+    # Change cursor shape depending on current mode
+    # https://stackoverflow.com/a/48449104
+    # https://stackoverflow.com/a/42107711
+    $if term=linux
+        set vi-ins-mode-string "(ins)"
+        set vi-cmd-mode-string "(cmd)"
+    $else
+        set vi-ins-mode-string "\1\e[6 q\2"
+        set vi-cmd-mode-string "\1\e[2 q\2"
+    $endif
+
+    set keymap vi-command
+    "H":    beginning-of-line
+    "L":    end-of-line
+    "daw":  "lbdW"
+    "yaw":  "lbyW"
+    "caw":  "lbcW"
+    "diw":  "lbdw"
+    "yiw":  "lbyw"
+    "ciw":  "lbcw"
+    "da\"": "lF\"df\""
+    "di\"": "lF\"lmtf\"d`t"
+    "ci\"": "di\"i"
+    "ca\"": "da\"i"
+    "da'":  "lF'df'"
+    "di'":  "lF'lmtf'd`t"
+    "ci'":  "di'i"
+    "ca'":  "da'i"
+    "da`":  "lF\`df\`"
+    "di`":  "lF\`lmtf\`d`t"
+    "ci`":  "di`i"
+    "ca`":  "da`i"
+    "da(":  "lF(df)"
+    "di(":  "lF(lmtf)d`t"
+    "ci(":  "di(i"
+    "ca(":  "da(i"
+    "da)":  "lF(df)"
+    "di)":  "lF(lmtf)d`t"
+    "ci)":  "di(i"
+    "ca)":  "da(i"
+    "da{":  "lF{df}"
+    "di{":  "lF{lmtf}d`t"
+    "ci{":  "di{i"
+    "ca{":  "da{i"
+    "da}":  "lF{df}"
+    "di}":  "lF{lmtf}d`t"
+    "ci}":  "di}i"
+    "ca}":  "da}i"
+    "da[":  "lF[df]"
+    "di[":  "lF[lmtf]d`t"
+    "ci[":  "di[i"
+    "ca[":  "da[i"
+    "da]":  "lF[df]"
+    "di]":  "lF[lmtf]d`t"
+    "ci]":  "di]i"
+    "ca]":  "da]i"
+
+    set keymap vi-insert
+    Control-a: beginning-of-line
+    Control-b: backward-char
+    Control-d: delete-char
+    Control-e: end-of-line
+    Control-f: forward-char
+    Control-k: kill-line
+    Control-l: clear-screen
+    "\e.": yank-last-arg
+
+    # Switch to vi-command mode (normal mode) before executing a command
+    Return: "\e\n"
+$endif
+
