@@ -18,6 +18,11 @@ if [ -f ~/.bash_profile ]; then
     . ~/.bash_profile
 fi
 
+# If ~/bin exists, add it to PATH
+if [ -d ~/bin ]; then
+    export PATH="$PATH:~/bin"
+fi
+
 # Defines the format of Bash prompt
 PS1="\[\e[1;32m\]\u:\[\e[1;96m\]\w\[\e[m\]\\$ "
 
