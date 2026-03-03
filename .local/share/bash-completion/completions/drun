@@ -1,0 +1,29 @@
+# Bash completion for drun command
+
+_drun_completions() {
+  local cur prev words cword
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+  # List of available subcommands. Keep in sync with the drun script.
+  local commands="e2etests mycmd2 help"
+
+  if [[ ${COMP_CWORD} -eq 1 ]]; then
+    COMPREPLY=( $(compgen -W "${commands}" -- ${cur}) )
+    return 0
+  fi
+
+  # Example: Add argument completion for a specific subcommand
+  # local command="${COMP_WORDS[1]}"
+  # case "${command}" in
+  #   e2etests)
+  #     # Add specific flag/arg completions for 'drun e2etests' here
+  #     local opts="--flag1 --flag2"
+  #     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+  #     ;;
+  # esac
+}
+
+complete -F _drun_completions drun
+

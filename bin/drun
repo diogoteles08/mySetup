@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# Source the shared configuration
+source "$HOME/bin/_drun_config.sh" || exit 1
+
+# Function to get the google3 root directory
+get_google3_root() {
+  local g3_root
+  g3_root=$(p4 g4d 2>/dev/null)
+  if [[ -n "$g3_root" ]]; then
+    echo "$g3_root"
+    return 0
+  else
+    return 1
+  fi
+}
+
+show_help() {
+  echo "Usage: drun <command> [args...]"
+  echo "Available commands:"
+  for cmd in "${DRUN_COMMANDS[@]}"; do
+    echo "  $cmd"
+  done
+}
+
+COMMAND="$1"
+if [[ -z "$COMMAND" ]]; then
+  show_help
+  exit 1
+fi
+shift # Remove the command from arguments, rest are passed to the subcommand
+
+case "$COMMAND" in
+  e2etests)
+    local G3_ROOT
+    G3_ROOT=$(get_google3_root)
+    if [[ $? -ne 0 ]]; then
+      echo "Error: 'e2etests' must be run from within a CitC client." >&2
+      exit 1
+    fi
+    echo "Running e2etests..."
+    TARGET_DIR="${G3_ROOT}/security/opensource/exit_gate_v1/src/ops/e2etests"
+    if [[ ! -d "$TARGET_DIR" ]]; then
+      echo "Error: Directory not found: $TARGET_DIR" >&2
+      exit 1
+    fi
+    echo "Changing to $TARGET_DIR"
+    pushd "$TARGET_DIR" > /dev/null
+    blaze run :e2etests -- "$@"
+    popd > /dev/null
+    ;;
+
+  local_list)
+    echo "Running local_list..."
+    echo "This command does not require a CitC client."
+    echo "Listing files in the current directory:"
+    ls -lH "$@"
+    ;;
+
+  help)
+    show_help
+    ;;
+
+  *)
+    # Check if the command exists in the list
+    is_known=0
+    for cmd in "${DRUN_COMMANDS[@]}"; do
+      if [[ "$cmd" == "$COMMAND" ]]; then
+        is_known=1
+        break
+      fi
+    done
+
+    if [[ $is_known -eq 0 ]]; then
+         echo "Error: Unknown command '$COMMAND'" >&2
+         show_help
+         exit 1
+    else
+         echo "Error: Command '$COMMAND' is defined in _drun_config.sh but not handled in the drun script." >&2
+         exit 1
+    fi
+    ;;
+esac
+
