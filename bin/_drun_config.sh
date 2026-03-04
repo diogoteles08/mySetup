@@ -10,7 +10,7 @@ DRUN_COMMANDS=(
   "e2etests"
   "push_trigger"
   "tf_apply"
-  "local_list"      # Does NOT require CitC
+  "local_test"      # Does NOT require CitC
   "help"
 )
 

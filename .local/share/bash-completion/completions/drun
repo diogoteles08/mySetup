@@ -6,11 +6,11 @@ _drun_completions() {
   cur="${COMP_WORDS[COMP_CWORD]}"
   prev="${COMP_WORDS[COMP_CWORD-1]}"
 
-  # List of available subcommands. Keep in sync with the drun script.
-  local commands="e2etests mycmd2 help"
+  # Source the shared configuration to get DRUN_COMMANDS array
+  source "$HOME/bin/_drun_config.sh"
 
   if [[ ${COMP_CWORD} -eq 1 ]]; then
-    COMPREPLY=( $(compgen -W "${commands}" -- ${cur}) )
+    COMPREPLY=( $(compgen -W "${DRUN_COMMANDS[*]}" -- ${cur}) )
     return 0
   fi
 
