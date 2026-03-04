@@ -32,7 +32,6 @@ shift # Remove the command from arguments, rest are passed to the subcommand
 
 case "$COMMAND" in
   e2etests)
-    local G3_ROOT
     G3_ROOT=$(get_google3_root)
     if [[ $? -ne 0 ]]; then
       echo "Error: 'e2etests' must be run from within a CitC client." >&2
@@ -46,8 +45,22 @@ case "$COMMAND" in
     fi
     echo "Changing to $TARGET_DIR"
     pushd "$TARGET_DIR" > /dev/null
-    blaze run :e2etests -- "$@"
+    blaze run :e2etests_workflow -- "$@"
     popd > /dev/null
+    ;;
+
+  push_trigger)
+    G3_ROOT=$(get_google3_root)
+    if [[ $? -ne 0 ]]; then
+      echo "Error: 'e2etests' must be run from within a CitC client." >&2
+      exit 1
+    fi
+    echo "Building trigger and pushing into trigger_binary:diogoteles"
+    blaze run //security/opensource/exit_gate_v1/src/cmd/trigger:trigger_image_push --define "TAG=diogoteles"
+    ;;
+
+  tf_apply)
+    sh ~/tfapply.sh
     ;;
 
   local_list)

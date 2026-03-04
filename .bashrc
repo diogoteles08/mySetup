@@ -14,9 +14,9 @@ if [ -f ~/.bash_secrets ]; then
 fi
 
 # This is where I usually put local or private configs
-if [ -f ~/.bash_profile ]; then
-    . ~/.bash_profile
-fi
+# if [ -f ~/.bash_profile ]; then
+    # . ~/.bash_profile
+# fi
 
 # If ~/bin exists, add it to PATH
 if [ -d ~/bin ]; then
