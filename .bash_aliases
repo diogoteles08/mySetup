@@ -5,3 +5,5 @@ alias vim="nvim"
 
 # Linux especific
 # alias op="gnome-open"
+
+alias tmux="tmx2"
