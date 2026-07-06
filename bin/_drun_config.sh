@@ -9,8 +9,12 @@ declare -a DRUN_COMMANDS
 DRUN_COMMANDS=(
   "e2etests"
   "push_trigger"
+  "push_jobs"
   "tf_apply"
+  "tf_fix"
   "local_test"      # Does NOT require CitC
+  "jetsky-permissions-sync"
+  "casper"
   "help"
 )
 

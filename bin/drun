@@ -31,6 +31,7 @@ fi
 shift # Remove the command from arguments, rest are passed to the subcommand
 
 case "$COMMAND" in
+
   e2etests)
     G3_ROOT=$(get_google3_root)
     if [[ $? -ne 0 ]]; then
@@ -45,7 +46,7 @@ case "$COMMAND" in
     fi
     echo "Changing to $TARGET_DIR"
     pushd "$TARGET_DIR" > /dev/null
-    blaze run :e2etests_workflow -- "$@"
+    blaze run :e2etests -- "$@"
     popd > /dev/null
     ;;
 
@@ -57,10 +58,49 @@ case "$COMMAND" in
     fi
     echo "Building trigger and pushing into trigger_binary:diogoteles"
     blaze run //security/opensource/exit_gate_v1/src/cmd/trigger:trigger_image_push --define "TAG=diogoteles"
+
+    echo "Deploying job trigger_binary:diogoteles to Cloud Run trigger_workflow"
+    gcloud run deploy trigger-workflow --project=oss-exit-gate-dev --region=us-central1 --image=us-docker.pkg.dev/oss-exit-gate-dev/oss-exit-gate/trigger-binary:diogoteles
     ;;
 
+  push_jobs)
+    G3_ROOT=$(get_google3_root)
+    if [[ $? -ne 0 ]]; then
+      echo "Error: 'e2etests' must be run from within a CitC client." >&2
+      exit 1
+    fi
+
+    # @ Propagates the arguments 
+    sh "${G3_ROOT}/security/opensource/exit_gate_v1/src/cmd/buildhelper/run.sh" push-jobs "$@"
+
+    ;;
+  
+
   tf_apply)
+    G3_ROOT=$(get_google3_root)
+    if [[ $? -ne 0 ]]; then
+      echo "Error: 'e2etests' must be run from within a CitC client." >&2
+      exit 1
+    fi
     sh ~/tfapply.sh
+    ;;
+
+  tf_fix)
+    G3_ROOT=$(get_google3_root)
+    if [[ $? -ne 0 ]]; then
+      echo "Error: 'e2etests' must be run from within a CitC client." >&2
+      exit 1
+    fi
+
+    WORKSPACE_NAME=$(pwd | awk -F/ '{print $6}')
+    ENV_DIRECTORY="/google/src/cloud/${USER}/${WORKSPACE_NAME}/google3/configs/cloud/gong/services/oss_exit_gate/envs/dev"
+    pushd "${ENV_DIRECTORY}"
+
+    # Ref: https://yaqs.corp.google.com/eng/q/5250254884048994304
+    rm -rf .terraform .terraform.lock.hcl
+    /google/bin/releases/g3terraform/runner_main --terraform_binary /bin/rm -- -rf /tf_plugin_cache/registry.terraform.io/
+
+    popd
     ;;
 
   local_list)
@@ -70,8 +110,37 @@ case "$COMMAND" in
     ls -lH "$@"
     ;;
 
+  casper)
+    TARGET_DIR="$HOME/casper/main"
+    if [[ ! -d "$TARGET_DIR" ]]; then
+      echo "Error: Directory not found: $TARGET_DIR" >&2
+      exit 1
+    fi
+    echo "Running Casper CLI from main worktree..."
+    pushd "$TARGET_DIR" > /dev/null
+    make build-cli > /dev/null
+    ./bin/casper "$@"
+    popd > /dev/null
+    ;;
+
   help)
     show_help
+    ;;
+
+  jetsky-permissions-sync)
+    G3_ROOT=$(get_google3_root)
+    if [[ $? -ne 0 ]]; then
+      echo "Error: 'jetsky-permissions-sync' must be run from within a CitC client." >&2
+      exit 1
+    fi
+    CLIENT_ROOT=$(dirname "${G3_ROOT}")
+    SYNC_SCRIPT="${CLIENT_ROOT}/configs/users/${USER}/_agents/sync_permissions.py"
+    if [[ ! -x "$SYNC_SCRIPT" ]]; then
+      echo "Error: Sync script not found or not executable: $SYNC_SCRIPT" >&2
+      exit 1
+    fi
+    echo "Running permissions sync..."
+    "$SYNC_SCRIPT" "$@"
     ;;
 
   *)
