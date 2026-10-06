@@ -12,3 +12,5 @@
 	autoSetupRemote = true
 [pull]
 	rebase = true
+[branch]
+	autoSetupMerge = simple
