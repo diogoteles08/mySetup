@@ -7,3 +7,4 @@ alias vim="nvim"
 # alias op="gnome-open"
 
 alias tmux="tmx2"
+alias gwl="git worktree list"
